@@ -35,6 +35,13 @@ const validate = (values) => {
 
 class ContactForm extends Component {
 
+  componentWillReceiveProps = (nextProps) => { // Receive Contact data Asynchronously
+    const { contact } = nextProps;
+    if(contact._id !== this.props.contact._id) { // Initialize form only once
+      this.props.initialize(contact)
+    }
+  }
+
   renderField = ({ input, label, type, meta: { touched, error } }) => (
     <Form.Field className={classnames({error:touched && error})}>
       <label>{label}</label>
@@ -49,7 +56,7 @@ class ContactForm extends Component {
     return (
       <Grid centered columns={2}>
         <Grid.Column>
-          <h1 style={{marginTop:"1em"}}>Add New Contact</h1>
+          <h1 style={{marginTop:"1em"}}>{this.props.contact._id ? 'Edit Contact' : 'Add New Contact'}</h1>
           <Form onSubmit={handleSubmit} loading={loading}>
             <Form.Group widths='equal'>
               <Field name="name.first" type="text" component={this.renderField} label="First Name"/>
