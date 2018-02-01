@@ -1,7 +1,7 @@
 const defaultState = {
   contacts: [],
   contact: {
-    name:{}
+    name: {}
   },
   loading: false,
   errors: {}
@@ -18,13 +18,13 @@ export default (state=defaultState, action={}) => {
     case "FETCH_CONTACTS_FULFILLED": {
       return {
         ...state,
-        contacts: action.payload.data.data || action.payload.data // in case pagination is disabled
+        contacts: action.payload.data.data || action.payload.data
       }
     }
     case 'NEW_CONTACT': {
       return {
         ...state,
-        contact: {name:{}}
+        contact: defaultState.contact
       }
     }
     case 'SAVE_CONTACT_PENDING': {
@@ -56,10 +56,9 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         loading: true,
-        contact: {name:{}}
+        contact: defaultState.contact
       }
     }
-    
     case 'FETCH_CONTACT_FULFILLED': {
       return {
         ...state,
@@ -68,14 +67,12 @@ export default (state=defaultState, action={}) => {
         loading: false
       }
     }
-    
     case 'UPDATE_CONTACT_PENDING': {
       return {
         ...state,
         loading: true
       }
     }
-    
     case 'UPDATE_CONTACT_FULFILLED': {
       const contact = action.payload.data;
       return {
@@ -85,7 +82,6 @@ export default (state=defaultState, action={}) => {
         loading: false
       }
     }
-    
     case 'UPDATE_CONTACT_REJECTED': {
       const data = action.payload.response.data;
       const { "name.first":first, "name.last":last, phone, email } = data.errors;

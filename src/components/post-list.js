@@ -1,12 +1,11 @@
 import React from 'react';
+import Pager from './pager';
 import PostItem from './post-item';
-import { Table, Menu, Icon } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 
-export default function PostList({posts, deletePost}){
-
+export default function PostList({posts, pager, deletePost, onPageChange}){
   const items = () => {
     return posts.map(post => {
-    console.log("PostList post", post);
       return (
         <PostItem 
           key={post._id} 
@@ -34,19 +33,10 @@ export default function PostList({posts, deletePost}){
       <Table.Footer>
         <Table.Row>
           <Table.HeaderCell colSpan='3'>
-            <Menu floated='right' pagination>
-              <Menu.Item as='a' icon>
-                <Icon name='left chevron' />
-              </Menu.Item>
-              <Menu.Item as='a'>1</Menu.Item>
-              <Menu.Item as='a'>2</Menu.Item>
-              <Menu.Item as='a' icon>
-                <Icon name='right chevron' />
-              </Menu.Item>
-            </Menu>
+            <Pager pager={pager} onPageChange={onPageChange} />
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
     </Table>
   )
-}
+} 

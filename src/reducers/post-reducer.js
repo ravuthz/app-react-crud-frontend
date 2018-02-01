@@ -1,6 +1,7 @@
 const defaultState = {
   posts: [],
   post: {},
+  pager: {},
   loading: false,
   errors: {}
 }
@@ -13,16 +14,24 @@ export default (state=defaultState, action={}) => {
         posts: action.payload
       }
     }
-    case "FETCH_POSTS_FULFILLED": {
+    case 'FETCH_POSTS_PENDING': {
       return {
         ...state,
-        posts: action.payload.data.data || action.payload.data
+        loading: true
+      }
+    }
+    case 'FETCH_POSTS_FULFILLED': {
+      return {
+        ...state,
+        posts: action.payload.data.data,
+        pager: action.payload.data.pager,
+        loading: false
       }
     }
     case 'NEW_POST': {
       return {
         ...state,
-        post: {}
+        post: defaultState.post
       }
     }
     case 'SAVE_POST_PENDING': {

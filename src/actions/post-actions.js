@@ -2,6 +2,15 @@ import { client } from './';
 
 const url = '/posts';
 
+export function fetchPostsByPage(page = 1, size = 5, sort = 'id,desc') {
+  return dispatch => {
+    return dispatch({
+      type: 'FETCH_POSTS',
+      payload: client.get(`${url}?$skip=${page-1}&$limit=${size}&$sort=${sort}`)
+    })
+  }
+}
+
 export function fetchPosts(){
   return dispatch => {
     dispatch({
