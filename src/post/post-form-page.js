@@ -2,10 +2,10 @@ import React, { Component} from 'react';
 import { Redirect } from 'react-router';
 import { SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import { newContact, saveContact, fetchContact, updateContact } from '../actions/contact-actions';
-import ContactForm from '../components/contact-form';
+import { newPost, savePost, fetchPost, updatePost } from './post-actions';
+import PostForm from './post-form';
 
-class ContactFormPage extends Component {
+class PostFormPage extends Component {
 
   state = {
     redirect: false
@@ -14,21 +14,21 @@ class ContactFormPage extends Component {
   componentDidMount = () => {
     const { _id } = this.props.match.params;
     if(_id){
-      this.props.fetchContact(_id)
+      this.props.fetchPost(_id)
     } else {
-      this.props.newContact();
+      this.props.newPost();
     }
   }
   
-  submit = (contact) => {
-    if(!contact._id) {
-      return this.props.saveContact(contact)
+  submit = (post) => {
+    if(!post._id) {
+      return this.props.savePost(post)
         .then(response => this.setState({ redirect:true }))
         .catch(err => {
            throw new SubmissionError(this.props.errors)
          })
     } else {
-      return this.props.updateContact(contact)
+      return this.props.updatePost(post)
         .then(response => this.setState({ redirect:true }))
         .catch(err => {
            throw new SubmissionError(this.props.errors)
@@ -41,8 +41,8 @@ class ContactFormPage extends Component {
       <div>
         {
           this.state.redirect ?
-          <Redirect to="/" /> :
-          <ContactForm contact={this.props.contact} loading={this.props.loading} onSubmit={this.submit} />
+          <Redirect to="/posts" /> :
+          <PostForm post={this.props.post} loading={this.props.loading} onSubmit={this.submit} />
         }
       </div>
     )
@@ -51,10 +51,10 @@ class ContactFormPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    contact: state.contactStore.contact,
-    errors: state.contactStore.errors
+    post: state.postStore.post,
+    errors: state.postStore.errors
   }
 }
 
 export default connect(mapStateToProps, 
-  {newContact, saveContact, fetchContact, updateContact})(ContactFormPage);
+  {newPost, savePost, fetchPost, updatePost})(PostFormPage);

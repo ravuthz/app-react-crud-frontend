@@ -1,16 +1,16 @@
 import React, { Component} from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import PostList from '../components/post-list';
-import { fetchPosts, deletePost, fetchPostsByPage } from '../actions/post-actions';
+import PostList from './post-list';
+import { fetchPosts, deletePost } from './post-actions';
 
 class PostListPage extends Component {
   componentDidMount() {
-    this.props.fetchPostsByPage(1);
+    this.props.fetchPosts(1);
   }
   
   onPageChange = (event, { activePage }) => {
-    this.props.fetchPostsByPage(activePage);
+    this.props.fetchPosts(activePage);
   }
   
   render() {
@@ -37,4 +37,4 @@ function mapStateToProps(state) {
   return state.postStore;
 }
 
-export default connect(mapStateToProps, {fetchPosts, deletePost, fetchPostsByPage})(PostListPage);
+export default connect(mapStateToProps, {fetchPosts, deletePost})(PostListPage);

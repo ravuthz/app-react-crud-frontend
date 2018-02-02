@@ -1,5 +1,5 @@
 import React from 'react';
-import Pager from './pager';
+import Pager from '../shared/pager';
 import PostItem from './post-item';
 import { Table } from 'semantic-ui-react';
 

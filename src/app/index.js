@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
-import ContactListPage from './pages/contact-list-page';
-import ContactFormPage from './pages/contact-form-page';
-import PostListPage from './pages/post-list-page';
-import PostFormPage from './pages/post-form-page';
+
+import PostFormPage from '../post/post-form-page';
+import PostListPage from '../post/post-list-page';
+import ContactFormPage from '../contact/contact-form-page';
+import ContactListPage from '../contact/contact-list-page';
 
 class App extends Component {
   render() {
     return (
       <Container>
-        <div className="ui four item menu">
+        <div className="ui five item menu">
           <NavLink className="item" activeClassName="active" exact to="/">
-            Contacts List
-          </NavLink>
-          <NavLink className="item" activeClassName="active" exact to="/contacts/new">
-            Add Contact
+            Home
           </NavLink>
           <NavLink className="item" activeClassName="active" exact to="/posts">
             Posts List
@@ -23,16 +21,20 @@ class App extends Component {
           <NavLink className="item" activeClassName="active" exact to="/posts/new">
             Add Post
           </NavLink>
+          <NavLink className="item" activeClassName="active" exact to="/contacts">
+            Contacts List
+          </NavLink>
+          <NavLink className="item" activeClassName="active" exact to="/contacts/new">
+            Add Contact
+          </NavLink>
         </div>
-        <Route exact path="/" component={ContactListPage}/>
-        
-        <Route path="/contacts" component={ContactFormPage}/>
-        <Route path="/contacts/new" component={ContactFormPage}/>
-        <Route path="/contacts/edit/:_id" component={ContactFormPage}/>
-        
+        <Route exact path="/" component={PostListPage}/>
         <Route exact path="/posts" component={PostListPage}/>
         <Route exact path="/posts/new" component={PostFormPage}/>
         <Route exact path="/posts/edit/:_id" component={PostFormPage}/>
+        <Route exact path="/contacts" component={ContactListPage}/>
+        <Route exact path="/contacts/new" component={ContactFormPage}/>
+        <Route exact path="/contacts/edit/:_id" component={ContactFormPage}/>
       </Container>
     );
   }
