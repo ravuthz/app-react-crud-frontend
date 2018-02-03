@@ -1,12 +1,12 @@
 import React, { Component} from 'react';
 import { Redirect } from 'react-router';
+import { Segment, Grid } from 'semantic-ui-react';
 import { SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import { newContact, saveContact, fetchContact, updateContact } from './contact-actions';
 import ContactForm from './contact-form';
+import { newContact, saveContact, fetchContact, updateContact } from './contact-actions';
 
 class ContactFormPage extends Component {
-
   state = {
     redirect: false
   }
@@ -37,14 +37,21 @@ class ContactFormPage extends Component {
   }
 
   render() {
+    const { contact, loading } = this.props;
     return (
-      <div>
-        {
-          this.state.redirect ?
-          <Redirect to="/" /> :
-          <ContactForm contact={this.props.contact} loading={this.props.loading} onSubmit={this.submit} />
-        }
-      </div>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column  mobile={16} widescreen={16} largeScreen={10}>
+            <Segment raised>
+              {
+                this.state.redirect ?
+                <Redirect to="/" /> :
+                <ContactForm contact={contact} loading={loading} onSubmit={this.submit} />
+              }
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }

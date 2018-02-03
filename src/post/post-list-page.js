@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
-import { Dimmer, Loader } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Segment, Header, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PostList from './post-list';
 import { fetchPosts, deletePost } from './post-actions';
@@ -15,18 +16,19 @@ class PostListPage extends Component {
   
   render() {
     return (
-      <div>
-        <h1>List of Posts</h1>
-        <Dimmer active={this.props.loading}>
-          <Loader size='huge'>Loading</Loader>
-        </Dimmer>
+      <Segment raised loading={this.props.loading}>
+        <Header as="h2">List of Posts</Header>
+        <Link to='/posts/new' className="ui basic button green">
+          <Icon name="edit"/>
+          New
+        </Link>
         <PostList
           posts={this.props.posts}
           pager={this.props.pager}
           deletePost={this.props.deletePost}
           onPageChange={this.onPageChange}
           />
-      </div>
+      </Segment>
     )
   }
 }

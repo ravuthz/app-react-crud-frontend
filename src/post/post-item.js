@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Icon } from 'semantic-ui-react';
 
 export default function PostItem({post, deletePost}) {
   return (
@@ -8,8 +8,12 @@ export default function PostItem({post, deletePost}) {
       <Table.Cell>{post._id}</Table.Cell>
       <Table.Cell>{post.title}</Table.Cell>
       <Table.Cell>
-        <Link to={`/posts/edit/${post._id}`} className="ui basic button green">Edit</Link>
-          <Button basic color="red" onClick={() => deletePost(post._id)} >Delete</Button>
+        <Button icon color="green" as={Link} to={`/posts/edit/${post._id}`}>
+          <Icon name="edit" />
+        </Button>
+        <Button icon color="red" onClick={() => deletePost(post._id)} >
+          <Icon name="trash" />
+        </Button>
       </Table.Cell>
     </Table.Row>
   )

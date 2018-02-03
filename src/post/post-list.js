@@ -22,7 +22,7 @@ export default function PostList({posts, pager, deletePost, onPageChange}){
         <Table.Row>
           <Table.HeaderCell>Id</Table.HeaderCell>
           <Table.HeaderCell>Title</Table.HeaderCell>
-          <Table.HeaderCell>Action</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">Action</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
   
