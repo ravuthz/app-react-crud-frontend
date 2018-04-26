@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const client = axios.create({
-  baseURL: "http://all-script-ravuthz.c9users.io:8081", //"https://app-react-crud-backend.herokuapp.com",
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
+    baseURL: "http://localhost:8081",
+    headers: {
+        "Content-Type": "application/json"
+    }
+});
